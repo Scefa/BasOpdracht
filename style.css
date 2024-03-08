@@ -16,8 +16,7 @@ body, h1, p {
 }
 
 .homelogo {
-    width: 150px;
-    height: auto;
+   width: 150px;
 }
 
 .homenav {
@@ -70,3 +69,16 @@ body, h1, p {
     top: 50%;
     border-top: 10px solid #4F6F52;
 }
+.button-container {
+    display: inline-block;
+  }
+  
+  .homelogo {
+    
+    width: 110px; 
+    height: auto; 
+    border: none; 
+  }
+  
+
+  
