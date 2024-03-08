@@ -1,0 +1,72 @@
+body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+
+.homeheader {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logos {
+    display: flex;
+    align-items: center;
+}
+
+.homelogo {
+    width: 150px;
+    height: auto;
+}
+
+.homenav {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    text-align: center;
+    font-size: 24px; 
+    font-family: 'Open Sans', Arial, sans-serif;
+    padding: 10px 0; 
+}
+
+.homenav a {
+    text-decoration: none;
+    margin: 0 20px; 
+    color: #333; 
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out; 
+}
+
+.homenav a:hover {
+    color: #4F6F52; 
+    transform: scale(1.1); 
+}
+
+.homebutton {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: end;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #FFFFFF;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 25px; 
+    font-family: Arial, sans-serif; 
+}
+
+.homebutton:hover {
+    background-color: #333333; 
+}
+
+.homeline {
+    margin: 1px 0 0 0;
+    width: 100%;
+    height: 1px;
+    left: 0;
+    top: 50%;
+    border-top: 10px solid #4F6F52;
+}
