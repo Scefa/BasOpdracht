@@ -25,13 +25,14 @@ class Database {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user && password_verify($password, $user['password'])) {
-                $_SESSION['username'] = $user['Email']; // Storing email instead of username
-                header('Location: index.php');
+                $_SESSION['username'] = $user['Email']; 
+                header('Location: main.php');
                 exit();
             } else {
                 echo "Invalid email or password.";
                 sleep(2);
-                header('Location: login+pagina.index.php');
+                header('Location: login_pagina.index.php');
+                exit();
             }
         } catch(PDOException $e) {
             echo "Error: " . $e->getMessage();
