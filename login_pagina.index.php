@@ -4,37 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form </title>
+    <title>Login Form</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <div>
-            
-            <button>
-                <img src="#" width="19">
+    <div class="container">
+        <div class="social-buttons">
+            <button class="google-btn">
+                <img src="./img/google logo.png" width="19" alt="Google Logo">
                 <span>Sign in with Google</span>
             </button>
-            <button>
-                <img src="#" width="19">
+            <button class="apple-btn">
+                <img src="./img/apple.png" width="19" alt="Apple Logo">
                 <span>Sign in with Apple</span>
             </button>
         </div>
         <h5>Or</h5>
-        <div>
+        <div class="login-form">
             <form>
-                <input type="text" placeholder="Phone,email, or username"/>
+                <input type="text" class="input-field" placeholder="Phone, email, or username"/>
             </form>
-            <button>Next</button>
-            <button>Forget password</button>
+            <button class="next-btn">Next</button>
+            <button class="forgot-btn">Forget password</button>
         </div>
-        <p>Don't have an account <a href="./signup_page.php">Sign Up</a></p>
+        <p>Don't have an account <a href="./signup_page.php" class="signup-link">Sign Up</a></p>
     </div>
 </body>
 </html>
-
-
-
-<?php
-
-require_once "database.php";
