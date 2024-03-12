@@ -82,98 +82,93 @@ body, h1, p {
 
 
 
-  body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
 
-.container {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 300px;
-    max-width: 100%;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
+body{
+  min-height: 100vh;
+  width: 100%;
 
-.social-buttons {
-    text-align: center;
-    margin-top: 20px;
 }
-
-.google-btn,
-.apple-btn {
-    background-color: #4285f4;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  max-width: 430px;
+  width: 100%;
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
-
-.google-btn img,
-.apple-btn img {
-    margin-right: 10px;
+.container .registration{
+  display: none;
 }
-
-.h5 {
-    text-align: center;
-    margin: 20px 0;
-    color: #333333;
+#check:checked ~ .registration{
+  display: block;
 }
-
-.login-form {
-    padding: 20px;
+#check:checked ~ .login{
+  display: none;
 }
-
-.input-field {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+#check{
+  display: none;
 }
-
-.next-btn {
-    background-color: #3498db;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
-    display: block;
-    margin-bottom: 15px;
+.container .form{
+  padding: 2rem;
 }
-
-.forgot-btn {
-    background-color: #e74c3c;
-    color: #ffffff;
-    border: none;
-    padding: 10px 0;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    width: 100%;
+.form header{
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
-
-.signup-link {
-    color: #3498db;
-    text-decoration: none;
-    font-weight: bold;
+ .form input{
+   height: 60px;
+   width: 100%;
+   padding: 0 15px;
+   font-size: 17px;
+   margin-bottom: 1.3rem;
+   border: 1px solid #ddd;
+   border-radius: 6px;
+   outline: none;
+ }
+ .form input:focus{
+   box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+ }
+.form a{
+  font-size: 16px;
+  color: #009579;
+  text-decoration: none;
 }
-
-.signup-link:hover {
-    text-decoration: underline;
+.form a:hover{
+  text-decoration: underline;
+}
+.form input.button{
+  color: #fff;
+  background: #009579;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-top: 1.7rem;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.form input.button:hover{
+  background: #006653;
+}
+.signup{
+  font-size: 17px;
+  text-align: center;
+}
+.signup label{
+  color: #009579;
+  cursor: pointer;
+}
+.signup label:hover{
+  text-decoration: underline;
 }
