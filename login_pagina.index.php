@@ -12,7 +12,8 @@
     <input type="checkbox" id="check">
     <div class="login form">
       <header>Login</header>
-      <form action="login_pagina.index.php" method="post"> 
+      <form action="login.php" method="post">
+
         <input type="text" name="email" placeholder="Enter your email" required> 
         <input type="password" name="password" placeholder="Enter your password" required> 
         <a href="#">Forgot password?</a>
