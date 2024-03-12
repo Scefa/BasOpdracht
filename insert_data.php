@@ -1,26 +1,27 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 
-class Database
-{
+class Database {
     private $host = "localhost";
     private $dbname = "bas";
     private $username = "root";
     private $password = "";
     public $conn;
 
-    public function __construct()
-    {
+    public function __construct() {
         try {
             $this->conn = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->username, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "Connected successfully"; // Debugging output
         } catch (PDOException $e) {
             die("Error!: " . $e->getMessage());
         }
     }
 
-    public function loginUser($email, $password)
-    {
+    public function loginUser($email, $password) {
         $query = $this->conn->prepare("SELECT * FROM students WHERE email = :email");
         $query->bindParam(":email", $email);
         $query->execute();
@@ -31,8 +32,8 @@ class Database
                 $_SESSION['user_id'] = $result['id'];
                 $_SESSION['username'] = $result['username'];
                 echo "You have successfully logged in as " . $_SESSION['username'];
-                header('Location: main.php'); // Redirect to main.php after successful login
-                exit(); // Ensure script execution stops after redirection
+                header('Location: main.php');
+                exit();
             } else {
                 echo "Incorrect password.";
             }
@@ -41,8 +42,7 @@ class Database
         }
     }
 
-    public function registerUser($email, $password)
-    {
+    public function registerUser($email, $password) {
         $query = $this->conn->prepare("SELECT * FROM students WHERE email = :email");
         $query->bindParam(":email", $email);
         $query->execute();
@@ -57,7 +57,7 @@ class Database
             $query->bindParam(":password", $hashedPassword);
 
             if ($query->execute()) {
-                header('Location: login.php'); 
+                header('Location: login.php');
                 exit();
             } else {
                 echo "An error occurred!";
