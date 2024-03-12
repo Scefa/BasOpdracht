@@ -21,7 +21,7 @@ class Database {
    
     public function login($email_or_username, $password) {
         try {
-            $stmt = $this->conn->prepare("SELECT * FROM users WHERE (Username = :email_or_username OR Email = :email_or_username)");
+            $stmt = $this->conn->prepare("SELECT * FROM students WHERE (Username = :email_or_username OR Email = :email_or_username)");
             $stmt->bindParam(':email_or_username', $email_or_username);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
