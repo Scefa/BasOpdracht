@@ -4,7 +4,7 @@ session_start();
 class Database
 {
     private $host = "localhost";
-    private $dbname = "chirpify";
+    private $dbname = "bas";
     private $username = "root";
     private $password = "";
     public $conn;
@@ -41,25 +41,23 @@ class Database
         }
     }
 
-    public function registerUser($email, $username, $password)
+    public function registerUser($email, $password)
     {
-        $query = $this->conn->prepare("SELECT * FROM students WHERE email = :email OR username = :username");
+        $query = $this->conn->prepare("SELECT * FROM students WHERE email = :email");
         $query->bindParam(":email", $email);
-        $query->bindParam(":username", $username);
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            echo "An account with that email or username already exists.";
+            echo "An account with that email already exists.";
         } else {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $query = $this->conn->prepare("INSERT INTO students (email, username, password) VALUES (:email, :username, :password)");
+            $query = $this->conn->prepare("INSERT INTO students (email, password) VALUES (:email, :password)");
             $query->bindParam(":email", $email);
-            $query->bindParam(":username", $username);
             $query->bindParam(":password", $hashedPassword);
 
             if ($query->execute()) {
-                header('Location: login.php'); // Redirect to login.php after successful registration
+                header('Location: login.php'); 
                 exit();
             } else {
                 echo "An error occurred!";
@@ -79,9 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['submit'])) {
         $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING);
-        $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING);
         $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING);
-        $database->registerUser($email, $username, $password);
+        $database->registerUser($email, $password);
     }
 }
 ?>
