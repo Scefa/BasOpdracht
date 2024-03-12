@@ -1,33 +1,49 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login & Registration Form</title>
+  <form action="main.php" method="post">
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="social-buttons">
-            <button class="google-btn">
-                <img src="./img/google logo.png" width="19" alt="Google Logo">
-                <span>Sign in with Google</span>
-            </button>
-            <button class="apple-btn">
-                <img src="./img/apple.png" width="19" alt="Apple Logo">
-                <span>Sign in with Apple</span>
-            </button>
-        </div>
-        <h5>Or</h5>
-        <div class="login-form">
-            <form>
-                <input type="text" class="input-field" placeholder="Phone, email, or username"/>
-            </form>
-            <button class="next-btn">Next</button>
-            <button class="forgot-btn">Forget password</button>
-        </div>
-        <p>Don't have an account <a href="./signup_page.php" class="signup-link">Sign Up</a></p>
+  <div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+      <header>Login</header>
+      <form action="#">
+        <input type="text" placeholder="Enter your email">
+        <input type="password" placeholder="Enter your password">
+        <a href="#">Forgot password?</a>
+        <input type="button" class="button" value="Login">
+      </form>
+      <div class="signup">
+        <span class="signup">Don't have an account?
+         <label for="check">Signup</label>
+        </span>
+      </div>
+</div>
+
+<div class="registration form">
+    <header>Signup</header>
+    <form action="login_pagina.index.php" method="post">
+       
+        <input type="text" name="email" placeholder="Enter your email" required>
+        <input type="password" name="password" placeholder="Create a password" required>
+        <input type="password" name="confirm_password" placeholder="Confirm your password" required>
+        <input type="submit" class="button" value="Signup" name="submit">
+
+    </form>
+    <div class="signup">
+        <span class="signup">Already have an account?
+            <label for="check"><a href="login_pagina.index.php">Login</a></label>
+        </span>
     </div>
+</div>
+
 </body>
 </html>
