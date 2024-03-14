@@ -12,7 +12,6 @@
     
 </head>
 <body>
-
       
 <a href="main.php" class="button-container">
   <img class="homelogo" src="./img/logobas.png" alt="Logo">
@@ -24,7 +23,9 @@
       <nav class="homenav">
         <a href="main.php">Home</a>
         <a href="contact.php">Contact</a>
+        <a href="aboutus.php">About us</a>
         <a href="login_pagina.index.php">Logout</a>
+      
       </nav>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
