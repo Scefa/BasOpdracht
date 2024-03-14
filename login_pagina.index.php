@@ -36,7 +36,7 @@
       </form>
       <div class="signup">
         <span class="signup">Already have an account?
-          <label for="check"><a href="login_pagina.index.php">Login</a></label>
+          <label for="check"><a href="login.php">Login</a></label>
         </span>
       </div>
     </div>
