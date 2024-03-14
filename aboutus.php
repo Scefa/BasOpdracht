@@ -18,8 +18,9 @@
       <nav class="homenav">
         <a href="main.php">Home</a>
         <a href="contact.php">Contact</a>
-        <a href="loginpage.php">Login</a>
         <a href="aboutus.php">About us</a>
+        <a href="loginpage.php">Login</a>
+      
       </nav>
       <form class="d-flex" role="search" action="search.php" method="post">
     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_query">
