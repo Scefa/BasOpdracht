@@ -12,27 +12,29 @@
     
 </head>
 <body>
+<header class="homeheader">
       
 <a href="main.php" class="button-container">
   <img class="homelogo" src="./img/logobas.png" alt="Logo">
 </a>
-
-        
-   
-
       <nav class="homenav">
         <a href="main.php">Home</a>
         <a href="contact.php">Contact</a>
         <a href="aboutus.php">About us</a>
-        <a href="login_pagina.index.php">Logout</a>
-      
+        <a href="loginpage.php">Login</a>
+        
       </nav>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-
+      <form class="d-flex" role="search" action="search.php" method="post">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_query">
+    <button class="btn btn-outline-success" type="submit" name="search_submit">Search</button>
+</form>
 
     </header>
     <div class="homeline"></div>
 
+
+
+
+
+</body>
+</html>
