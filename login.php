@@ -38,14 +38,14 @@ class Database {
         } catch(PDOException $e) {
             
             file_put_contents('pdo_errors.log', "[" . date('Y-m-d H:i:s') . "] Error: " . $e->getMessage() . "\n", FILE_APPEND);
-            echo "An error occurred. Please try again later."; // Provide a generic message to the user
+            echo "An error occurred. Please try again later."; 
             exit();
         }
     }
     
 }
 
-// Example usage:
+
 $db = new Database();
 $email = $_POST['email'];
 $password = $_POST['password'];
