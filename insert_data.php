@@ -15,7 +15,7 @@ class Database {
         try {
             $this->conn = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->username, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Connected successfully"; 
+           
         } catch (PDOException $e) {
             die("Error!: " . $e->getMessage());
         }
@@ -43,11 +43,20 @@ class Database {
     }
 
     public function registerUser($email, $password) {
+        
+        if (strpos($email, '@student.zadkine.nl') === false) {
+            echo "Only email addresses with the domain @student.zadkine.nl are allowed for registration.";
+            echo "<br>";
+            echo '<button onclick="window.location.href=\'login_pagina.index.php\'">Go to Login Page</button>';
+            return; 
+        }
+    
+        // Proceed with the registration process
         $query = $this->conn->prepare("SELECT * FROM students WHERE email = :email");
         $query->bindParam(":email", $email);
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
-
+    
         if ($result) {
             echo "An account with that email already exists.";
         } else {
@@ -55,31 +64,31 @@ class Database {
             $query = $this->conn->prepare("INSERT INTO students (email, password) VALUES (:email, :password)");
             $query->bindParam(":email", $email);
             $query->bindParam(":password", $hashedPassword);
-
+    
             if ($query->execute()) {
-                header('Location: login.php');
+                header('Location: login_pagina.index.php');
                 exit();
             } else {
                 echo "An error occurred!";
             }
         }
     }
+    
 }
 
 $database = new Database();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['login'])) {
-        $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING);
-        $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING);
-        $database->loginUser($email, $password);
-    }
-
-    if (isset($_POST['submit'])) {
-        $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING);
-        $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING);
-        $database->registerUser($email, $password);
-    }
+if (isset($_POST['login'])) {
+    $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
+    $password = $_POST["password"]; // No need for sanitization on password
+    $database->loginUser($email, $password);
 }
+
+if (isset($_POST['submit'])) {
+    $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
+    $password = $_POST["password"]; // No need for sanitization on password
+    $database->registerUser($email, $password);
+}
+
 
 ?>
