@@ -51,11 +51,11 @@ $database = new Database();
 
 if (isset($_POST['login'])) {
     $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
-    $password = $_POST["password"]; 
+   $password = $_POST["password"]; 
     $loginResult = $database->loginUser($email, $password);
     if ($loginResult === true) {
-        header('Location: main.php');
-        exit();
+      header('Location: main.php');
+       exit();
     } else {
         $errorMessage = $loginResult;
     }
