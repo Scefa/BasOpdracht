@@ -24,7 +24,9 @@ class Database {
             $stmt->bindParam(':email', $email);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
+            var_dump($user); // Debugging: Check the fetched user data
+            
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['username'] = $user['Email']; 
                 header('Location: main.php');
@@ -49,6 +51,9 @@ $db = new Database();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
+
+    var_dump($email, $password); // Debugging: Check the values of email and password
+    
     $db->login($email, $password);
 }
 ?>
