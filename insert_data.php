@@ -51,7 +51,7 @@ class Database {
             return; 
         }
     
-        // Proceed with the registration process
+        
         $query = $this->conn->prepare("SELECT * FROM students WHERE email = :email");
         $query->bindParam(":email", $email);
         $query->execute();
@@ -80,13 +80,13 @@ $database = new Database();
 
 if (isset($_POST['login'])) {
     $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
-    $password = $_POST["password"]; // No need for sanitization on password
+    $password = $_POST["password"]; 
     $database->loginUser($email, $password);
 }
 
 if (isset($_POST['submit'])) {
     $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
-    $password = $_POST["password"]; // No need for sanitization on password
+    $password = $_POST["password"]; 
     $database->registerUser($email, $password);
 }
 
