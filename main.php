@@ -21,7 +21,7 @@
         <a href="main.php">Home</a>
         <a href="contact.php">Contact</a>
         <a href="aboutus.php">About us</a>
-        <a href="login_pagina.index.php">Logout</a>
+        <a href="login_pagina.index.php">Login</a>
         
       </nav>
       <form class="d-flex" role="search" action="search.php" method="post">
