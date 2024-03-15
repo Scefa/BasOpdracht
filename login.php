@@ -1,59 +1,43 @@
 <?php
+require "database.php";
 session_start();
 
-class Database {
-    private $host = "localhost"; 
-    private $username = "root"; 
-    private $password = ""; 
-    private $database = "bas"; 
+class LoginHandler {
     private $conn;
 
-    public function __construct() {
-        try {
-            $this->conn = new PDO("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-            exit(); 
-        }
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
 
-    public function login($email, $password) {
-        try {
-            $stmt = $this->conn->prepare("SELECT * FROM students WHERE Email = :email");
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    public function loginUser($email, $password) {
+        $get_user = $this->conn->prepare("SELECT * FROM bas.students WHERE email = :email");
+        $get_user->bindParam(":email", $email);
+        $get_user->execute();
+        $user = $get_user->fetch();
 
-            var_dump($user); // Debugging: Check the fetched user data
-            
-            if ($user && password_verify($password, $user['password'])) {
-                $_SESSION['username'] = $user['Email']; 
-                header('Location: main.php');
-                exit();
-            } else {
-                echo "Invalid email or password.";
-                sleep(2);
-                header('Location: login_pagina.index.php');
-                exit();
-            }
-        } catch(PDOException $e) {
-            file_put_contents('pdo_errors.log', "[" . date('Y-m-d H:i:s') . "] Error: " . $e->getMessage() . "\n", FILE_APPEND);
-            echo "An error occurred. Please try again later."; 
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        
+
+        if (password_verify($user['password'], $password_hash)) {
+            $_SESSION['email'] = $email;
+           header('Location: main.php');
+            exit();
+        } else {
+            echo ($user['password']);
+            echo "Invalid email or password.";
+            sleep(2);
+            header('Location: login_pagina.index.php');
             exit();
         }
+        
     }
-    
 }
 
-$db = new Database();
+ 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    var_dump($email, $password); // Debugging: Check the values of email and password
-    
-    $db->login($email, $password);
-}
+//Usage:
+ //$loginHandler = new LoginHandler($conn);
+ //$email = $_POST['email_or_username'];
+ //$password = $_POST['password'];
+ //$loginHandler->loginUser($email, $password);
 ?>
