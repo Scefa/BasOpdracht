@@ -22,7 +22,7 @@
         <a href="contact.php">Contact</a>
         <a href="aboutus.php">About us</a>
         <a href="login_pagina.index.php">Login</a>
-        
+
       </nav>
       <form class="d-flex" role="search" action="search.php" method="post">
     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_query">
@@ -34,7 +34,51 @@
 
 
 
+    <?php
+session_start();
+
+    $user = ("SELECT * FROM students WHERE email = :email");
+if ($_SESSION['email'] !== null) {
+    echo "Welcome: ".$_SESSION['email'];
+} else {
+    echo "You are not logged in.";
+}
+?>
+
+<div class="user">
+  <div class="user-img-wrapper">
+    <img src="#" alt="" />
+  </div>
+  <?php if (isset($_SESSION['email']) && $_SESSION['email'] !== null): ?>
+    <a href="#" class="user-link light-text"><?php echo substr($_SESSION['email'], 0, ); ?></a>
+  <?php else: ?>
+    <a href="#" class="user-link light-text">-</a>
+  <?php endif; ?>
+ 
 
 
+
+
+  
+  <div class="container mt-5">
+    <h2>Borrow Books</h2>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <form>
+                <div class="mb-3">
+                    <label for="bookTitle" class="form-label">Book Title</label>
+                    <input type="text" class="form-control" id="bookTitle" placeholder="Enter book title">
+                </div>
+                <div class="mb-3">
+                    <label for="author" class="form-label">Author</label>
+                    <input type="text" class="form-control" id="author" placeholder="Enter author name">
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+</nav>
 </body>
 </html>
