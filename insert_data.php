@@ -66,7 +66,7 @@ class Database {
             $query->bindParam(":password", $hashedPassword);
     
             if ($query->execute()) {
-                header('Location: login_pagina.index.php');
+                header('Location: login_form.html');
                 exit();
             } else {
                 echo "An error occurred!";
