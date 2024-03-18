@@ -26,25 +26,31 @@ class Database {
         $query->bindParam(":email", $email);
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
-
+    
         if ($result) {
             
-            if (isset($result['password'])) {
-                if (password_verify($password, $result['password'])) {
-                    $_SESSION['user_id'] = $result['id'];
-                    $_SESSION['username'] = $result['username'];
-                    header('Location: main.php');
-                    exit();
+            $domain = explode('@', $email);
+            if (isset($domain[1]) && $domain[1] === 'student.zadkine.nl') {
+                if (isset($result['password'])) {
+                    if (password_verify($password, $result['password'])) {
+                        $_SESSION['user_id'] = $result['id'];
+                        $_SESSION['username'] = $result['username'];
+                        header('Location: main.php');
+                        exit();
+                    } else {
+                        return "Incorrect password.";
+                    }
                 } else {
-                    return "Incorrect password.";
+                    return "Password field not found in database.";
                 }
             } else {
-                return "Password field not found in database.";
+                return "Only users with email addresses ending in '@student.zadkine.nl' can login.";
             }
         } else {
             return "There is no account with that email address.";
         }
     }
+    
 }
 
 $database = new Database();
