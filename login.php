@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 session_start();
 
@@ -28,17 +26,16 @@ class Database {
         $result = $query->fetch(PDO::FETCH_ASSOC);
     
         if ($result) {
-            
             $domain = explode('@', $email);
             if (isset($domain[1]) && $domain[1] === 'student.zadkine.nl') {
-                if (isset($result['password'])) {
-                    if (password_verify($password, $result['password'])) {
+                if (isset($result['password_hashed'])) { // Controleren op een gehasht wachtwoord
+                    if (password_verify($password, $result['password_hashed'])) {
                         $_SESSION['user_id'] = $result['id'];
                         $_SESSION['username'] = $result['username'];
                         header('Location: main.php');
                         exit();
                     } else {
-                        return "Incorrect password.";
+                        return "Incorrect email or password.";
                     }
                 } else {
                     return "Password field not found in database.";
@@ -47,8 +44,9 @@ class Database {
                 return "Only users with email addresses ending in '@student.zadkine.nl' can login.";
             }
         } else {
-            return "There is no account with that email address.";
+            return "Incorrect email or password."; 
         }
+       
     }
     
 }
@@ -57,7 +55,7 @@ $database = new Database();
 
 if (isset($_POST['login'])) {
     $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
-   $password = $_POST["password"]; 
+    $password = $_POST["password"]; 
     $loginResult = $database->loginUser($email, $password);
     if ($loginResult === true) {
       header('Location: main.php');
@@ -66,4 +64,4 @@ if (isset($_POST['login'])) {
         $errorMessage = $loginResult;
     }
 }
-?>
+
