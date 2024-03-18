@@ -55,99 +55,57 @@
         
     <?php endif; ?>
 
-    <?php
-class BookSearch {
-    private $conn;
-
-    public function __construct($servername, $username, $password, $database) {
-       
-        $this->conn = new mysqli($servername, $username, $password, $database);
-
-        
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-        }
-    }
-
-    public function searchBooks($searchTerm) {
-      
-      $sql = "SELECT * FROM books WHERE Title LIKE '%" . $this->conn->real_escape_string($searchTerm) . "%' OR Author LIKE '%" . $this->conn->real_escape_string($searchTerm) . "%'";
-  
-     
-      $result = $this->conn->query($sql);
-  
-      
-      $books = [];
-      if ($result) {
-          while ($row = $result->fetch_assoc()) {
-              $books[] = ["title" => $row["Title"], "author" => $row["Author"]];
-          }
-      }
-  
-      return $books;
-  }
-  
-  
-
-    public function closeConnection() {
-        
-        $this->conn->close();
-    }
-}
-
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "bas";
-
-
-$search = new BookSearch($servername, $username, $password, $database);
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    $searchTitle = $_POST["bookTitle"];
-    $searchAuthor = $_POST["author"];
-
-    
-    $books = $search->searchBooks($searchTitle, $searchAuthor);
-
-    
-    if (!empty($books)) {
-        echo "<h3>Search Results:</h3>";
-        echo "<ul>";
-        foreach ($books as $book) {
-            echo "<li>Title: " . $book["title"] . ", Author: " . $book["author"] . "</li>";
-        }
-        echo "</ul>";
-    } else {
-        echo "<p>No books found matching your search criteria.</p>";
-    }
-}
-
-
-$search->closeConnection();
-?>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Search</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
 
 <div class="container mt-5">
     <h2>Borrow Books</h2>
     <div class="row mt-4">
         <div class="col-md-6">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <form id="searchForm">
                 <div class="mb-3">
-                    <label for="bookTitle" class="form-label">Book Title</label>
-                    <input type="text" class="form-control" id="bookTitle" name="bookTitle" placeholder="Enter book title">
+                    <label for="searchTerm" class="form-label">Search</label>
+                    <input type="text" class="form-control" id="searchTerm" name="searchTerm" placeholder="Enter book title or author">
                 </div>
-                <div class="mb-3">
-                    <label for="author" class="form-label">Author</label>
-                    <input type="text" class="form-control" id="author" name="author" placeholder="Enter author name">
-                </div>
-                <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
     </div>
+    <div id="searchResults"></div>
 </div>
+
+<script>
+    // Function to perform live search
+    function liveSearch() {
+        var searchTerm = document.getElementById('searchTerm').value;
+
+        // Send AJAX request
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'search.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('searchResults').innerHTML = xhr.responseText;
+            }
+        }
+
+        xhr.send('searchTerm=' + searchTerm);
+    }
+
+    // Event listener for input changes
+    document.getElementById('searchTerm').addEventListener('input', liveSearch);
+</script>
+
+</body>
+</html>
+
 
 
     </div>
