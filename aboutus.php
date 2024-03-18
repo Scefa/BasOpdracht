@@ -17,8 +17,8 @@
 </a>
       <nav class="homenav">
         <a href="main.php">Home</a>
-        <a href="contact.php">Contact</a>
         <a href="aboutus.php">About us</a>
+        <a href="contact.php">Contact</a>
         <a href="login_pagina.index.php">Login</a>
        
       
