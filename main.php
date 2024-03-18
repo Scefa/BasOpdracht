@@ -15,8 +15,8 @@
     </a>
     <nav class="homenav">
         <a href="main.php">Home</a>
-        <a href="contact.php">Contact</a>
         <a href="aboutus.php">About us</a>
+        <a href="contact.php">Contact</a>
         <?php if(isset($_SESSION['email']) && $_SESSION['email'] !== null): ?>
             <a href="logout.php">Logout</a>
         <?php else: ?>
