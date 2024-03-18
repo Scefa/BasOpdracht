@@ -185,23 +185,11 @@ body{
 
 .form-control,
 .btn-primary {
-  border-radius: 10px;
-  padding: 12px 20px;
-  font-size: 16px;
+  border-radius: 20px;
+  padding: 20px 30px;
+  font-size: 20px; 
   transition: all 0.3s ease;
 }
-
-.form-control {
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-.form-control:hover,
-.form-control:focus {
-  border-color: #6c757d;
-  outline: none;
-}
-
 
 .btn-primary {
   background-color: #ff0000;
@@ -209,6 +197,20 @@ body{
   cursor: pointer;
   color: #fff;
 }
+
+.btn-primary:hover {
+  background-color: #ffffff;
+}
+
+
+.form-control {
+  margin-left: auto;
+}
+
+.btn-primary {
+  margin-left: 10px; 
+}
+
 
 .btn-primary:hover {
   background-color: #ffffff;
